@@ -1,0 +1,29 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet');
+ :root {
+     --pbmit-global-color:  #ec733b;
+     --pbmit-secondary-color: #10151b;
+     --pbmit-light-color: #f0f2f7;
+     --pbmit-white-color:#ffffff;   
+     --pbmit-blackish-color: #10151b;
+     --pbmit-link-color-normal: #030313;
+     --pbmit-link-color-hover: #ec733b;
+     --pbmit-global-color-rgb:236, 115, 59;
+     --pbmit-secondary-color-rgb: 16, 21, 27;
+     --pbmit-responsive-breakpoint: 1200px;
+     --pbmit-body-typography-font-family:'DM Sans', sans-serif;
+     --pbmit-body-typography-variant: regular;
+     --pbmit-body-typography-font-size: 16px;
+     --pbmit-body-typography-line-height: 26px;
+     --pbmit-body-typography-color: #787c8b;
+     --pbmit-heading-typography-font-family: 'Quicksand', sans-serif;
+     --pbmit-heading-color: #030313;
+     --pbmit-heading-font-variant: 700;
+     --pbmit-btn-typography-font-family:'Quicksand', sans-serif;
+     --pbmit-btn-typography-variant: 700;
+     --pbmit-btn-typography-font-size: 13px;
+     --pbmit-btn-typography-line-height: 20px;
+     --pbmit-border-radius: 0px;
+}
+ 

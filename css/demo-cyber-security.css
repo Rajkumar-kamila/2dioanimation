@@ -1,0 +1,29 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet');
+ :root {
+     --pbmit-global-color:  #fc746c;
+     --pbmit-secondary-color: #8639fd;
+     --pbmit-light-color: #eef3f7;
+     --pbmit-white-color:#ffffff;
+     --pbmit-blackish-color: #020637;
+     --pbmit-link-color-normal: #020637;
+     --pbmit-link-color-hover: #ea534a;
+     --pbmit-global-color-rgb:rgb(252, 116, 108);
+     --pbmit-secondary-color-rgb: rgb(134, 57, 253);
+     --pbmit-responsive-breakpoint: 1200px;
+     --pbmit-body-typography-font-family:'DM Sans', sans-serif;
+     --pbmit-body-typography-variant: regular;
+     --pbmit-body-typography-font-size: 16px;
+     --pbmit-body-typography-line-height: 26px;
+     --pbmit-body-typography-color: #787c8b;
+     --pbmit-heading-typography-font-family: 'Asap', sans-serif;
+     --pbmit-heading-color: #020637;
+     --pbmit-heading-font-variant: 700;
+     --pbmit-btn-typography-font-family: 'Asap', sans-serif;
+     --pbmit-btn-typography-variant: 700;
+     --pbmit-btn-typography-font-size: 13px;
+     --pbmit-btn-typography-line-height: 23px;
+     --pbmit-border-radius: 50px;
+}
+ 

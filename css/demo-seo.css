@@ -1,0 +1,44 @@
+/******************************
+INDEX:
+    00 - General
+    01 - Typography
+    02 - Text Color & Background Color
+    03 - Background Position & Size
+    04 - Helper class
+    05 - Social icons
+    06 - Header
+    07 - Bootstrap Overwrite 
+    08 - Swiper 
+    09 - Scroll To Top 
+    10 - Search Box
+******************************/
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet');
+ :root {
+     --pbmit-global-color:  #ff6600;
+     --pbmit-secondary-color: #1e266d;
+     --pbmit-light-color: #f3f5f7;
+     --pbmit-white-color:#ffffff;
+     --pbmit-blackish-color: #030313;
+     --pbmit-link-color-normal: #030313;
+     --pbmit-link-color-hover: #ff6600;
+     --pbmit-global-color-rgb: 255, 102, 0;
+     --pbmit-secondary-color-rgb: 30, 38, 109;
+     --pbmit-responsive-breakpoint: 1200px;
+     --pbmit-body-typography-font-family:'DM Sans', sans-serif;
+     --pbmit-body-typography-variant: regular;
+     --pbmit-body-typography-font-size: 16px;
+     --pbmit-body-typography-line-height: 26px;
+     --pbmit-body-typography-color: #787c8b;
+     --pbmit-heading-typography-font-family: 'Quicksand', sans-serif;
+     --pbmit-heading-color: #030313;
+     --pbmit-heading-font-variant: 700;
+     --pbmit-btn-typography-font-family:'Quicksand', sans-serif;
+     --pbmit-btn-typography-variant: 700;
+     --pbmit-btn-typography-font-size: 13px;
+     --pbmit-btn-typography-line-height: 20px;
+     --pbmit-border-radius: 50px;
+     --pbmit-box-shadow:0 0 32px 0 rgba(255,102,0,.3);
+     --pbmit-box-shadow-hover:0 0 32px 0 rgb(3 3 19 / 30%);
+}
+ 

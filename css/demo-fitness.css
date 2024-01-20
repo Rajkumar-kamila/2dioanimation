@@ -1,0 +1,30 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet');
+ :root {
+     --pbmit-global-color:  #8cdca4;
+     --pbmit-secondary-color: #fabe2c;
+     --pbmit-light-color: #f3fbf6;
+     --pbmit-white-color:#ffffff;
+     --pbmit-blackish-color: #223035;
+     --pbmit-link-color-normal: #223035;
+     --pbmit-link-color-hover: #8bdfa3;
+     --pbmit-global-color-rgb:rgb(140, 220, 164);
+     --pbmit-secondary-color-rgb: rgb(250, 190, 44);
+     --pbmit-responsive-breakpoint: 1200px;
+     --pbmit-body-typography-font-family:'DM Sans', sans-serif;
+     --pbmit-body-typography-variant: regular;
+     --pbmit-body-typography-font-size: 16px;
+     --pbmit-body-typography-line-height: 26px;
+     --pbmit-body-typography-color: #787c8b;
+     --pbmit-heading-typography-font-family:'Poppins', sans-serif;
+     --pbmit-heading-color: #223035;
+     --pbmit-heading-font-variant: 600;
+     --pbmit-btn-typography-font-family:'Poppins', sans-serif;
+     --pbmit-btn-typography-variant: 500;
+     --pbmit-btn-typography-font-size: 13px;
+     --pbmit-btn-typography-line-height: 20px;
+     --pbmit-border-radius: 50px;
+     --pbmit-box-shadow: 0 0 32px 0 rgba(var(--pbmit-global-color),.3);
+}
+ 

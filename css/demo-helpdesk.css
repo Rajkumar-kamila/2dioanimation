@@ -1,0 +1,30 @@
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;1,200;1,300;1,400&display=swap" rel="stylesheet');
+ :root {
+     --pbmit-global-color:  #f4747c;
+     --pbmit-secondary-color: #534258;
+     --pbmit-light-color: #f6f4f2;
+     --pbmit-white-color:#ffffff;
+     --pbmit-blackish-color: #00354c;
+     --pbmit-link-color-normal: #00354c;
+     --pbmit-link-color-hover: #f6707a;
+     --pbmit-global-color-rgb: 244, 116, 124;
+     --pbmit-secondary-color-rgb: 83, 66, 88;
+     --pbmit-responsive-breakpoint: 1200px;
+     --pbmit-body-typography-font-family:'DM Sans', sans-serif;
+     --pbmit-body-typography-variant: regular;
+     --pbmit-body-typography-font-size: 16px;
+     --pbmit-body-typography-line-height: 26px;
+     --pbmit-body-typography-color: #787c8b;
+     --pbmit-heading-typography-font-family:'Mulish', sans-serif;
+     --pbmit-heading-color: #00354c;
+     --pbmit-heading-font-variant: 700;
+     --pbmit-btn-typography-font-family:'Quicksand', sans-serif;
+     --pbmit-btn-typography-variant: 700;
+     --pbmit-btn-typography-font-size: 14px;
+     --pbmit-btn-typography-line-height: 30px;
+     --pbmit-border-radius: 50px;
+}
+ 
