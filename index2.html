@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>2Dio Animation | Horror Homies — Animated Stories</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&family=Bebas+Neue&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   CSS VARIABLES — LIGHT & DARK THEMES
+   ============================================================ */
+:root {
+  --bg:       #faf8f5;
+  --bg2:      #f0ede8;
+  --bg3:      #e8e3db;
+  --card:     #ffffff;
+  --card2:    #f7f4ef;
+  --text:     #1a1714;
+  --text2:    #4a4540;
+  --muted:    #8c8480;
+  --border:   rgba(0,0,0,0.1);
+  --border2:  rgba(0,0,0,0.06);
+  --accent:   #d4380d;
+  --accent2:  #ff6b35;
+  --gold:     #c89b3c;
+  --gold2:    #f0c060;
+  --shadow:   0 4px 24px rgba(0,0,0,0.08);
+  --shadow2:  0 12px 48px rgba(212,56,13,0.15);
+  --glow:     0 0 30px rgba(212,56,13,0.3);
+  --nav-bg:   rgba(250,248,245,0.95);
+}
+
+[data-theme="dark"] {
+  --bg:       #0c0b0a;
+  --bg2:      #121110;
+  --bg3:      #1a1816;
+  --card:     #1c1a18;
+  --card2:    #221f1c;
+  --text:     #f0ece6;
+  --text2:    #b0aaa4;
+  --muted:    #6a6460;
+  --border:   rgba(255,255,255,0.08);
+  --border2:  rgba(255,255,255,0.04);
+  --accent:   #e84422;
+  --accent2:  #ff6b35;
+  --gold:     #e0b050;
+  --gold2:    #ffd060;
+  --shadow:   0 4px 24px rgba(0,0,0,0.4);
+  --shadow2:  0 12px 48px rgba(232,68,34,0.2);
+  --glow:     0 0 40px rgba(232,68,34,0.4);
+  --nav-bg:   rgba(12,11,10,0.95);
+}
+
+/* ============================================================
+   RESET & BASE
+   ============================================================ */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; font-size:16px; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  transition: background 0.4s, color 0.4s;
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+a { text-decoration:none; color:inherit; }
+img { max-width:100%; display:block; }
+
+/* ============================================================
+   TYPOGRAPHY
+   ============================================================ */
+.display {
+  font-family: 'Playfair Display', serif;
+  font-weight: 900;
+  line-height: 1.05;
+}
+.display-alt {
+  font-family: 'Bebas Neue', cursive;
+  letter-spacing: 3px;
+}
+
+/* ============================================================
+   NAVIGATION
+   ============================================================ */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:1000;
+  background: var(--nav-bg);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.4s, border-color 0.4s;
+}
+.nav-inner {
+  max-width: 1280px; margin:0 auto;
+  padding: 0 5%;
+  height: 68px;
+  display: flex; align-items:center; justify-content:space-between;
+  gap: 2rem;
+}
+.nav-logo {
+  font-family: 'Bebas Neue', cursive;
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  color: var(--text);
+  flex-shrink: 0;
+}
+.nav-logo .red { color: var(--accent); }
+.nav-logo .gold { color: var(--gold); }
+
+.nav-links {
+  display: flex; align-items:center; gap:0.25rem; list-style:none;
+}
+.nav-links a {
+  padding: 6px 14px; border-radius:6px;
+  font-size:0.88rem; font-weight:600;
+  color: var(--text2);
+  transition: all 0.2s;
+}
+.nav-links a:hover { color:var(--text); background:var(--bg2); }
+.nav-links .yt-btn {
+  background: var(--accent); color:#fff !important;
+  padding: 7px 18px; border-radius:6px;
+  font-size:0.85rem !important;
+  transition: all 0.25s !important;
+}
+.nav-links .yt-btn:hover { opacity:0.88; transform:scale(1.04); background:var(--accent) !important; }
+
+.nav-right { display:flex; align-items:center; gap:0.75rem; flex-shrink:0; }
+
+/* THEME TOGGLE */
+.theme-toggle {
+  width:48px; height:26px;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius:13px; cursor:pointer;
+  position:relative; transition:background 0.3s;
+  flex-shrink:0;
+}
+.theme-toggle-knob {
+  position:absolute; top:3px; left:3px;
+  width:18px; height:18px; border-radius:50%;
+  background: var(--accent);
+  transition: transform 0.3s;
+  display:flex; align-items:center; justify-content:center;
+  font-size:10px;
+}
+[data-theme="dark"] .theme-toggle-knob { transform:translateX(22px); }
+.theme-toggle-knob::after { content:'☀️'; }
+[data-theme="dark"] .theme-toggle-knob::after { content:'🌙'; }
+
+.hamburger {
+  display:none; flex-direction:column;
+  gap:5px; cursor:pointer; padding:4px;
+  background:none; border:none;
+}
+.hamburger span { display:block; width:22px; height:2px; background:var(--text); border-radius:2px; transition:0.3s; }
+
+/* Mobile nav */
+.mobile-nav {
+  display:none; flex-direction:column;
+  background:var(--card); border-bottom:1px solid var(--border);
+  padding:1rem 5%; gap:0.25rem;
+  position:fixed; top:68px; left:0; right:0; z-index:999;
+}
+.mobile-nav a {
+  padding:0.75rem 1rem; border-radius:8px;
+  font-weight:600; color:var(--text2);
+  transition:all 0.2s;
+}
+.mobile-nav a:hover { background:var(--bg2); color:var(--text); }
+.mobile-nav.open { display:flex; }
+
+@media(max-width:960px) {
+  .nav-links { display:none; }
+  .hamburger { display:flex; }
+}
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  min-height: 100vh;
+  padding: 100px 5% 80px;
+  display: flex; align-items:center;
+  position:relative; overflow:hidden;
+  background: var(--bg);
+}
+.hero-bg-shape {
+  position:absolute; top:-10%; right:-5%;
+  width:55vw; height:55vw; max-width:700px; max-height:700px;
+  border-radius: 50% 40% 60% 30%;
+  background: linear-gradient(135deg, rgba(212,56,13,0.08), rgba(200,155,60,0.06));
+  pointer-events:none;
+  animation: morphblob 12s ease-in-out infinite alternate;
+}
+.hero-bg-shape2 {
+  position:absolute; bottom:-10%; left:-5%;
+  width:40vw; height:40vw; max-width:500px; max-height:500px;
+  border-radius: 60% 40% 30% 70%;
+  background: linear-gradient(45deg, rgba(212,56,13,0.05), rgba(255,107,53,0.04));
+  pointer-events:none;
+  animation: morphblob 16s ease-in-out infinite alternate-reverse;
+}
+@keyframes morphblob {
+  0% { border-radius:50% 40% 60% 30%; }
+  50% { border-radius:30% 60% 40% 70%; }
+  100% { border-radius:60% 30% 50% 40%; }
+}
+
+.hero-inner {
+  max-width:1280px; margin:0 auto; width:100%;
+  display: grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center;
+}
+@media(max-width:900px) { .hero-inner { grid-template-columns:1fr; gap:3rem; } }
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:50px; padding:6px 16px;
+  font-size:0.78rem; font-weight:600; letter-spacing:2px;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:1.5rem;
+  box-shadow: var(--shadow);
+  animation: fadeUp 0.7s ease both;
+}
+.hero h1 {
+  font-size: clamp(3rem, 6vw, 5.5rem);
+  animation: fadeUp 0.8s ease 0.1s both;
+  margin-bottom:1.5rem;
+}
+.hero h1 em { color:var(--accent); font-style:normal; }
+.hero h1 .line2 { color:var(--gold); }
+
+.hero-desc {
+  font-size:1.1rem; color:var(--text2);
+  line-height:1.8; max-width:520px;
+  margin-bottom:2.5rem;
+  animation: fadeUp 0.9s ease 0.2s both;
+  font-weight:400;
+}
+
+.hero-actions {
+  display:flex; gap:1rem; flex-wrap:wrap;
+  animation: fadeUp 1s ease 0.3s both;
+}
+
+.btn-primary {
+  background: var(--accent); color:#fff;
+  padding:13px 28px; border-radius:8px;
+  font-weight:700; font-size:0.95rem; letter-spacing:0.5px;
+  transition:all 0.25s; border:none; cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-primary:hover { transform:translateY(-2px); box-shadow:var(--shadow2); opacity:0.92; }
+
+.btn-outline {
+  background:transparent; color:var(--text);
+  padding:13px 28px; border-radius:8px;
+  font-weight:700; font-size:0.95rem;
+  border:1.5px solid var(--border);
+  transition:all 0.25s; cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px;
+}
+.btn-outline:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+
+.hero-stats {
+  display:flex; gap:2.5rem; flex-wrap:wrap;
+  margin-top:3rem; padding-top:2rem;
+  border-top:1px solid var(--border);
+  animation: fadeUp 1.1s ease 0.4s both;
+}
+.stat-item { }
+.stat-num {
+  font-family:'Bebas Neue',cursive;
+  font-size:2.2rem; color:var(--accent); line-height:1;
+}
+.stat-label { font-size:0.78rem; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; margin-top:3px; }
+
+/* Hero visual */
+.hero-visual {
+  position:relative;
+  animation: fadeUp 0.9s ease 0.2s both;
+}
+.hero-card-main {
+  background: var(--card);
+  border:1px solid var(--border);
+  border-radius:20px;
+  overflow:hidden;
+  box-shadow: var(--shadow);
+}
+.hero-card-main .card-banner {
+  background: linear-gradient(135deg, #1a0a04, #2d1a08, #1a0a04);
+  height:220px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:5rem; position:relative; overflow:hidden;
+}
+.hero-card-main .card-banner::after {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse at center, rgba(212,56,13,0.2), transparent 70%);
+}
+.hero-card-body { padding:1.5rem; }
+.hero-card-body h3 { font-size:1.1rem; font-weight:700; margin-bottom:0.4rem; }
+.hero-card-body p { font-size:0.85rem; color:var(--muted); }
+.play-pill {
+  display:inline-flex; align-items:center; gap:6px;
+  background:var(--accent); color:#fff;
+  padding:6px 14px; border-radius:50px;
+  font-size:0.8rem; font-weight:700;
+  margin-top:1rem;
+}
+
+.floating-tag {
+  position:absolute;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:10px; padding:8px 14px;
+  box-shadow:var(--shadow);
+  font-size:0.8rem; font-weight:600;
+  display:flex; align-items:center; gap:6px;
+}
+.floating-tag.tag1 { top:-15px; right:-10px; }
+.floating-tag.tag2 { bottom:30px; left:-20px; }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(24px); }
+  to { opacity:1; transform:translateY(0); }
+}
+
+/* ============================================================
+   SHARED SECTION STYLES
+   ============================================================ */
+.section-wrap {
+  max-width:1280px; margin:0 auto; padding:0 5%;
+}
+section { padding:90px 0; }
+section.alt-bg { background:var(--bg2); }
+
+.section-eyebrow {
+  font-size:0.75rem; font-weight:700; letter-spacing:3px;
+  text-transform:uppercase; color:var(--accent);
+  margin-bottom:0.75rem;
+}
+.section-heading {
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom:1rem; line-height:1.1;
+}
+.section-subheading {
+  font-size:1.05rem; color:var(--text2);
+  max-width:580px; line-height:1.75;
+}
+
+.divider-line {
+  height:1px;
+  background: linear-gradient(to right, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
+}
+
+/* ============================================================
+   VIDEO TYPES SECTION
+   ============================================================ */
+.video-types-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr));
+  gap:1rem; margin-top:3rem;
+}
+.video-type-card {
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:14px; padding:1.75rem 1rem;
+  text-align:center;
+  transition:all 0.3s; cursor:default;
+}
+.video-type-card:hover {
+  border-color:var(--accent);
+  transform:translateY(-4px);
+  box-shadow: var(--shadow);
+}
+.vt-icon { font-size:2.2rem; margin-bottom:0.75rem; }
+.vt-name { font-weight:700; font-size:0.9rem; margin-bottom:0.3rem; }
+.vt-desc { font-size:0.78rem; color:var(--muted); line-height:1.5; }
+
+/* ============================================================
+   YOUTUBE VIDEOS
+   ============================================================ */
+.videos-header {
+  display:flex; justify-content:space-between; align-items:flex-end;
+  flex-wrap:wrap; gap:1.5rem; margin-bottom:3rem;
+}
+.video-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+  gap:1.5rem;
+}
+.video-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden;
+  transition:all 0.3s; display:block; color:inherit;
+}
+.video-card:hover { transform:translateY(-5px); box-shadow:var(--shadow2); border-color:var(--accent); }
+.video-thumb {
+  position:relative; aspect-ratio:16/9;
+  background:var(--bg3); overflow:hidden;
+}
+.video-thumb img { width:100%; height:100%; object-fit:cover; transition:transform 0.4s; }
+.video-card:hover .video-thumb img { transform:scale(1.06); }
+.video-overlay {
+  position:absolute; inset:0;
+  background:rgba(0,0,0,0.25);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; transition:opacity 0.3s;
+}
+.video-card:hover .video-overlay { opacity:1; }
+.play-circle {
+  width:56px; height:56px; border-radius:50%;
+  background:var(--accent);
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.4rem; color:#fff;
+  box-shadow:0 4px 20px rgba(0,0,0,0.4);
+}
+.video-info { padding:1.1rem 1.2rem; }
+.video-title { font-weight:700; font-size:0.92rem; line-height:1.45; margin-bottom:0.5rem; }
+.video-meta { font-size:0.78rem; color:var(--muted); display:flex; gap:0.75rem; align-items:center; }
+
+/* Skeleton */
+.skeleton {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:14px; overflow:hidden;
+  animation:shimmer 1.5s ease infinite;
+}
+@keyframes shimmer { 0%,100%{opacity:1} 50%{opacity:0.5} }
+.sk-thumb { aspect-ratio:16/9; background:var(--bg3); }
+.sk-body { padding:1.1rem; }
+.sk-line { height:11px; background:var(--bg2); border-radius:4px; margin-bottom:8px; }
+.sk-line.s60 { width:60%; }
+
+/* ============================================================
+   ABOUT
+   ============================================================ */
+.about-grid {
+  display:grid; grid-template-columns:1fr 1.1fr; gap:5rem; align-items:center;
+}
+@media(max-width:800px) { .about-grid { grid-template-columns:1fr; gap:3rem; } }
+
+.about-img-wrap {
+  position:relative;
+}
+.about-big-box {
+  background: linear-gradient(135deg, #2d1a08 0%, #1a0a04 50%, #0c1a2d 100%);
+  border-radius:20px; padding:3rem;
+  text-align:center; font-size:5rem; line-height:1.3;
+  border:1px solid var(--border);
+  position:relative; overflow:hidden;
+}
+.about-big-box::before {
+  content:''; position:absolute; inset:0;
+  background:radial-gradient(ellipse at 50% 50%, rgba(212,56,13,0.15), transparent 60%);
+}
+.about-tag {
+  position:absolute; background:var(--accent); color:#fff;
+  border-radius:8px; padding:5px 14px;
+  font-size:0.78rem; font-weight:700;
+  bottom:20px; right:20px;
+}
+
+.features-list { margin-top:2.5rem; display:flex; flex-direction:column; gap:1rem; }
+.feature-row {
+  display:flex; align-items:flex-start; gap:1rem;
+  padding:1rem 1.2rem;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:10px; transition:border-color 0.3s;
+}
+.feature-row:hover { border-color:var(--accent); }
+.feature-icon-wrap {
+  width:40px; height:40px; flex-shrink:0;
+  background:rgba(212,56,13,0.1); border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem;
+}
+.feature-title { font-weight:700; font-size:0.92rem; margin-bottom:3px; }
+.feature-body { font-size:0.83rem; color:var(--muted); line-height:1.5; }
+
+/* ============================================================
+   TEAM
+   ============================================================ */
+.team-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(200px,1fr));
+  gap:1.5rem; margin-top:3rem;
+}
+.team-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:16px; padding:2rem 1.5rem;
+  text-align:center; transition:all 0.3s;
+}
+.team-card:hover { transform:translateY(-5px); border-color:var(--accent); box-shadow:var(--shadow); }
+.team-avatar {
+  width:72px; height:72px; border-radius:50%;
+  background:var(--bg2); border:2px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:2rem; margin:0 auto 1rem;
+  transition:border-color 0.3s;
+}
+.team-card:hover .team-avatar { border-color:var(--accent); }
+.team-name { font-weight:700; font-size:1rem; margin-bottom:3px; }
+.team-role { font-size:0.78rem; color:var(--accent); text-transform:uppercase; letter-spacing:1px; margin-bottom:0.75rem; font-weight:600; }
+.team-bio { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
+/* ============================================================
+   PROCESS
+   ============================================================ */
+.process-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr));
+  gap:1.5rem; margin-top:3rem; position:relative;
+}
+.process-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:16px; padding:2rem 1.5rem;
+  text-align:center; transition:all 0.3s;
+  position:relative; overflow:hidden;
+}
+.process-card::before {
+  content:attr(data-num);
+  position:absolute; right:12px; top:8px;
+  font-family:'Bebas Neue',cursive; font-size:3.5rem;
+  color:var(--accent); opacity:0.08; line-height:1;
+}
+.process-card:hover { transform:translateY(-5px); border-color:var(--accent); }
+.process-icon { font-size:2rem; margin-bottom:1rem; }
+.process-title { font-weight:700; font-size:0.95rem; margin-bottom:0.5rem; }
+.process-desc { font-size:0.82rem; color:var(--muted); line-height:1.6; }
+
+/* ============================================================
+   TESTIMONIALS
+   ============================================================ */
+.testimonials-grid {
+  display:grid; grid-template-columns:repeat(auto-fill, minmax(280px,1fr));
+  gap:1.5rem; margin-top:3rem;
+}
+.testimonial-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:16px; padding:1.75rem;
+  transition:all 0.3s;
+}
+.testimonial-card:hover { transform:translateY(-4px); border-color:var(--gold); box-shadow:var(--shadow); }
+.stars { color:var(--gold); font-size:0.9rem; margin-bottom:1rem; letter-spacing:2px; }
+.testimonial-text { font-size:0.9rem; color:var(--text2); line-height:1.75; margin-bottom:1.25rem; font-style:italic; }
+.testimonial-author { display:flex; align-items:center; gap:0.75rem; }
+.author-avatar {
+  width:38px; height:38px; border-radius:50%;
+  background:linear-gradient(135deg, var(--accent), var(--gold));
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-weight:700; font-size:0.9rem;
+}
+.author-name { font-weight:700; font-size:0.9rem; }
+.author-tag { font-size:0.75rem; color:var(--muted); }
+
+/* ============================================================
+   CONTACT
+   ============================================================ */
+.contact-grid {
+  display:grid; grid-template-columns:1fr 1fr; gap:4rem; align-items:start;
+}
+@media(max-width:800px) { .contact-grid { grid-template-columns:1fr; } }
+
+.contact-items { display:flex; flex-direction:column; gap:1rem; margin-top:2rem; }
+.contact-row {
+  display:flex; align-items:center; gap:1rem;
+  background:var(--card); border:1px solid var(--border);
+  border-radius:10px; padding:1rem 1.25rem;
+  transition:border-color 0.3s;
+}
+.contact-row:hover { border-color:var(--accent); }
+.contact-row-icon {
+  width:42px; height:42px; flex-shrink:0;
+  background:rgba(212,56,13,0.1); border-radius:8px;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.1rem;
+}
+.contact-row-label { font-size:0.72rem; color:var(--muted); text-transform:uppercase; letter-spacing:1.5px; margin-bottom:3px; font-weight:600; }
+.contact-row-val { font-weight:600; font-size:0.9rem; }
+.contact-row-val a { color:var(--accent); }
+
+.social-row { display:flex; gap:0.75rem; margin-top:2rem; flex-wrap:wrap; }
+.social-btn {
+  display:flex; align-items:center; gap:8px;
+  padding:9px 18px; border-radius:8px;
+  border:1px solid var(--border);
+  font-size:0.82rem; font-weight:600;
+  transition:all 0.25s; color:var(--text);
+}
+.social-btn:hover { border-color:var(--accent); color:var(--accent); transform:translateY(-2px); }
+.social-btn.yt { background:var(--accent); color:#fff; border-color:var(--accent); }
+.social-btn.yt:hover { opacity:0.85; color:#fff; }
+
+/* Contact Form */
+.form-card {
+  background:var(--card); border:1px solid var(--border);
+  border-radius:20px; padding:2.5rem;
+}
+.form-title { font-weight:700; font-size:1.2rem; margin-bottom:2rem; }
+.form-group { margin-bottom:1.25rem; }
+.form-label { font-size:0.78rem; font-weight:700; text-transform:uppercase; letter-spacing:1px; color:var(--muted); margin-bottom:6px; display:block; }
+.form-input, .form-textarea, .form-select {
+  width:100%;
+  background:var(--bg2); border:1.5px solid var(--border2);
+  border-radius:8px; padding:11px 14px;
+  color:var(--text); font-family:'DM Sans',sans-serif;
+  font-size:0.93rem; outline:none;
+  transition:border-color 0.25s, background 0.25s;
+}
+.form-input:focus, .form-textarea:focus, .form-select:focus {
+  border-color:var(--accent); background:var(--card);
+}
+.form-textarea { min-height:110px; resize:vertical; }
+.form-select option { background:var(--card); }
+.form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:1rem; }
+@media(max-width:480px) { .form-row-2 { grid-template-columns:1fr; } }
+
+.form-submit {
+  width:100%; background:var(--accent); color:#fff;
+  border:none; border-radius:8px;
+  padding:13px; font-family:'DM Sans',sans-serif;
+  font-weight:700; font-size:0.95rem; cursor:pointer;
+  transition:all 0.25s;
+}
+.form-submit:hover { opacity:0.9; transform:translateY(-1px); box-shadow:var(--shadow2); }
+.form-submit:disabled { opacity:0.6; cursor:default; transform:none; }
+
+.form-success {
+  display:none; text-align:center; padding:2rem;
+  background:rgba(22,180,90,0.1); border:1px solid rgba(22,180,90,0.3);
+  border-radius:10px; color:#16b45a;
+  font-weight:600; font-size:1rem;
+}
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  background:var(--bg2); border-top:1px solid var(--border);
+  padding:70px 0 0;
+}
+.footer-inner {
+  max-width:1280px; margin:0 auto; padding:0 5%;
+  display:grid; grid-template-columns:2fr 1fr 1fr 1fr; gap:3rem;
+  padding-bottom:3rem;
+}
+@media(max-width:900px) { .footer-inner { grid-template-columns:1fr 1fr; } }
+@media(max-width:520px) { .footer-inner { grid-template-columns:1fr; } }
+
+.footer-logo { font-family:'Bebas Neue',cursive; font-size:2rem; letter-spacing:3px; margin-bottom:1rem; }
+.footer-logo .red { color:var(--accent); }
+.footer-desc { font-size:0.88rem; color:var(--muted); line-height:1.75; margin-bottom:1.5rem; max-width:280px; }
+.footer-social { display:flex; gap:0.5rem; flex-wrap:wrap; }
+.footer-social a {
+  width:36px; height:36px; border-radius:8px;
+  border:1px solid var(--border);
+  display:flex; align-items:center; justify-content:center;
+  font-size:0.9rem; transition:all 0.2s;
+}
+.footer-social a:hover { border-color:var(--accent); transform:translateY(-2px); }
+
+.footer-col h4 {
+  font-weight:700; font-size:0.85rem; text-transform:uppercase;
+  letter-spacing:1.5px; color:var(--text); margin-bottom:1.2rem;
+}
+.footer-col ul { list-style:none; display:flex; flex-direction:column; gap:0.6rem; }
+.footer-col ul a { font-size:0.87rem; color:var(--muted); transition:color 0.2s; }
+.footer-col ul a:hover { color:var(--accent); }
+
+.footer-bottom {
+  border-top:1px solid var(--border);
+  padding:1.5rem 5%;
+  max-width:1280px; margin:0 auto;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:0.75rem;
+  font-size:0.83rem; color:var(--muted);
+}
+.footer-bottom a { color:var(--accent); }
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity:0; transform:translateY(28px);
+  transition:opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.in { opacity:1; transform:none; }
+.reveal-delay-1 { transition-delay:0.1s; }
+.reveal-delay-2 { transition-delay:0.2s; }
+.reveal-delay-3 { transition-delay:0.3s; }
+.reveal-delay-4 { transition-delay:0.4s; }
+
+/* ============================================================
+   SCROLL TO TOP
+   ============================================================ */
+#scrollTop {
+  position:fixed; bottom:28px; right:28px; z-index:999;
+  width:44px; height:44px; border-radius:10px;
+  background:var(--accent); color:#fff; border:none;
+  font-size:1.1rem; cursor:pointer;
+  opacity:0; transform:translateY(8px);
+  transition:all 0.3s; box-shadow:var(--shadow);
+}
+#scrollTop.show { opacity:1; transform:none; }
+#scrollTop:hover { opacity:0.85; transform:translateY(-2px); }
+
+/* ============================================================
+   WA FLOAT
+   ============================================================ */
+.wa-float {
+  position:fixed; bottom:28px; left:28px; z-index:999;
+  background:#25d366; color:#fff;
+  width:52px; height:52px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.5rem; box-shadow:0 4px 20px rgba(37,211,102,0.35);
+  transition:all 0.3s;
+}
+.wa-float:hover { transform:scale(1.1); }
+
+</style>
+</head>
+<body>
+
+<!-- ======= NAV ======= -->
+<nav>
+  <div class="nav-inner">
+    <a href="#home" class="nav-logo">2<span class="red">D</span>IO <span class="gold">ANIM</span></a>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#videos">Videos</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#team">Team</a></li>
+      <li><a href="#process">Process</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="https://www.youtube.com/@horrorhomies2609" target="_blank" class="yt-btn">▶ Subscribe</a></li>
+    </ul>
+    <div class="nav-right">
+      <button class="theme-toggle" onclick="toggleTheme()" title="Toggle theme">
+        <div class="theme-toggle-knob"></div>
+      </button>
+      <button class="hamburger" onclick="toggleMobileNav()">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#home" onclick="closeMobileNav()">Home</a>
+  <a href="#videos" onclick="closeMobileNav()">Videos</a>
+  <a href="#about" onclick="closeMobileNav()">About</a>
+  <a href="#team" onclick="closeMobileNav()">Team</a>
+  <a href="#process" onclick="closeMobileNav()">Our Process</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  <a href="https://www.youtube.com/@horrorhomies2609" target="_blank">▶ YouTube Channel</a>
+</div>
+
+<!-- ======= HERO ======= -->
+<section id="home" style="padding-top:0;">
+  <div class="hero">
+    <div class="hero-bg-shape"></div>
+    <div class="hero-bg-shape2"></div>
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge">🎬 Animated Horror Stories</div>
+        <h1 class="display">
+          We Animate<br>
+          <em>Dark & Chilling</em><br>
+          <span class="line2">Stories</span>
+        </h1>
+        <p class="hero-desc">
+          2Dio Animation creates original 2D animated horror stories and cartoons in Hindi. 
+          Delivering spine-tingling content on our <strong>Horror Homies</strong> YouTube channel — 
+          fear has never looked this good.
+        </p>
+        <div class="hero-actions">
+          <a href="#videos" class="btn-primary">▶ Watch Videos</a>
+          <a href="https://www.youtube.com/@horrorhomies2609" target="_blank" class="btn-outline">🔔 Subscribe</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-num">50K+</div>
+            <div class="stat-label">Subscribers</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">200+</div>
+            <div class="stat-label">Videos</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">5M+</div>
+            <div class="stat-label">Total Views</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-num">100%</div>
+            <div class="stat-label">Original</div>
+          </div>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="hero-card-main">
+          <div class="card-banner">
+            <span style="position:relative;z-index:1;">👻🎬💀</span>
+          </div>
+          <div class="hero-card-body">
+            <h3>Horror Homies — Latest Episode</h3>
+            <p>Animated horror stories in Hindi every week</p>
+            <a href="https://www.youtube.com/@horrorhomies2609" target="_blank" class="play-pill">▶ Watch Now</a>
+          </div>
+        </div>
+        <div class="floating-tag tag1">🔥 Trending in India</div>
+        <div class="floating-tag tag2">⭐ Original Stories</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ======= VIDEO TYPES ======= -->
+<section id="types">
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center; max-width:640px; margin:0 auto 0;">
+      <p class="section-eyebrow">🎭 What We Create</p>
+      <h2 class="section-heading display">Type of Videos<br><em style="color:var(--accent)">We Make</em></h2>
+      <p class="section-subheading" style="margin:0 auto;">From spine-chilling horror tales to educational animations — here's the full range of content we produce at 2Dio Animation.</p>
+    </div>
+    <div class="video-types-grid">
+      <div class="video-type-card reveal reveal-delay-1">
+        <div class="vt-icon">👻</div>
+        <div class="vt-name">Horror Stories</div>
+        <div class="vt-desc">Animated supernatural & folk horror tales in Hindi</div>
+      </div>
+      <div class="video-type-card reveal reveal-delay-2">
+        <div class="vt-icon">🎭</div>
+        <div class="vt-name">2D Animation</div>
+        <div class="vt-desc">Full frame-by-frame 2D animated productions</div>
+      </div>
+      <div class="video-type-card reveal reveal-delay-3">
+        <div class="vt-icon">📚</div>
+        <div class="vt-name">Explainer Videos</div>
+        <div class="vt-desc">Animated explainers for brands and products</div>
+      </div>
+      <div class="video-type-card reveal reveal-delay-4">
+        <div class="vt-icon">🎵</div>
+        <div class="vt-name">Kids Rhymes</div>
+        <div class="vt-desc">Fun animated nursery rhymes for children</div>
+      </div>
+      <div class="video-type-card reveal reveal-delay-1">
+        <div class="vt-icon">🏫</div>
+        <div class="vt-name">Educational</div>
+        <div class="vt-desc">E-learning & kindergarten educational content</div>
+      </div>
+      <div class="video-type-card reveal reveal-delay-2">
+        <div class="vt-icon">📖</div>
+        <div class="vt-name">Book Projects</div>
+        <div class="vt-desc">Animated school book & curriculum projects</div>
+      </div>
+      <div class="video-type-card reveal reveal-delay-3">
+        <div class="vt-icon">🕯️</div>
+        <div class="vt-name">Dark Cartoons</div>
+        <div class="vt-desc">Atmospheric dark-themed cartoon series</div>
+      </div>
+      <div class="video-type-card reveal reveal-delay-4">
+        <div class="vt-icon">📺</div>
+        <div class="vt-name">YouTube Videos</div>
+        <div class="vt-desc">Custom YouTube content for creators & brands</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ======= YOUTUBE VIDEOS ======= -->
+<section id="videos" class="alt-bg">
+  <div class="section-wrap">
+    <div class="videos-header reveal">
+      <div>
+        <p class="section-eyebrow">📺 Horror Homies — YouTube</p>
+        <h2 class="section-heading display">Latest <em style="color:var(--accent)">Videos</em></h2>
+        <p class="section-subheading">Our freshest animated horror stories — straight from the channel.</p>
+      </div>
+      <a href="https://www.youtube.com/@horrorhomies2609" target="_blank" class="btn-outline">View All →</a>
+    </div>
+    <div id="videos-wrap">
+      <div class="video-grid" id="skeleton-grid">
+        <div class="skeleton"><div class="sk-thumb"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line s60"></div></div></div>
+        <div class="skeleton"><div class="sk-thumb"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line s60"></div></div></div>
+        <div class="skeleton"><div class="sk-thumb"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line s60"></div></div></div>
+        <div class="skeleton"><div class="sk-thumb"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line s60"></div></div></div>
+        <div class="skeleton"><div class="sk-thumb"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line s60"></div></div></div>
+        <div class="skeleton"><div class="sk-thumb"></div><div class="sk-body"><div class="sk-line"></div><div class="sk-line s60"></div></div></div>
+      </div>
+      <div class="video-grid" id="real-grid" style="display:none;"></div>
+      <div id="yt-error" style="display:none; text-align:center; padding:3rem;">
+        <p style="font-size:2.5rem; margin-bottom:1rem;">📺</p>
+        <p style="color:var(--muted); margin-bottom:1.5rem;">Watch our latest videos directly on YouTube!</p>
+        <a href="https://www.youtube.com/@horrorhomies2609" target="_blank" class="btn-primary">Open Horror Homies →</a>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:3rem;" class="reveal">
+      <a href="https://www.youtube.com/@horrorhomies2609" target="_blank" class="btn-primary">🎬 More Videos on YouTube</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ======= ABOUT ======= -->
+<section id="about">
+  <div class="section-wrap">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <div class="about-big-box">
+          <div style="position:relative;z-index:1;font-size:4.5rem;line-height:1.4;">👻<br>🎬<br>💀</div>
+          <div class="about-tag">Since 2022</div>
+        </div>
+        <div class="features-list">
+          <div class="feature-row">
+            <div class="feature-icon-wrap">🎭</div>
+            <div><div class="feature-title">Original Stories</div><div class="feature-body">100% original Hindi horror narratives written in-house</div></div>
+          </div>
+          <div class="feature-row">
+            <div class="feature-icon-wrap">🖌️</div>
+            <div><div class="feature-title">Hand-Crafted Animation</div><div class="feature-body">Frame-by-frame 2D animation with cinematic detail</div></div>
+          </div>
+          <div class="feature-row">
+            <div class="feature-icon-wrap">🎙️</div>
+            <div><div class="feature-title">Professional Voice Acting</div><div class="feature-body">Expressive Hindi voice performances for every character</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="reveal">
+        <p class="section-eyebrow">👻 Our Story</p>
+        <h2 class="section-heading display">We Are<br><em style="color:var(--accent)">2Dio Animation</em></h2>
+        <p class="section-subheading" style="margin-bottom:1.5rem;">
+          Born from a deep passion for storytelling, 2Dio Animation is a creative studio based in India that specializes in animated horror stories and dark cartoons for the modern Indian audience.
+        </p>
+        <p style="font-size:1rem; color:var(--text2); line-height:1.8; margin-bottom:1.5rem;">
+          Our <strong>Horror Homies</strong> YouTube channel has grown into a beloved destination for Hindi horror fans, delivering original animated tales that blend traditional folklore, supernatural suspense, and high-quality 2D visuals.
+        </p>
+        <p style="font-size:1rem; color:var(--text2); line-height:1.8; margin-bottom:2rem;">
+          We also offer <strong>B2B animation services</strong> — from explainer videos to educational content — helping brands and creators tell their stories through the power of animation.
+        </p>
+        <div style="display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="https://www.youtube.com/@horrorhomies2609" target="_blank" class="btn-primary">▶ Watch Channel</a>
+          <a href="#contact" class="btn-outline">Hire Us</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ======= TEAM ======= -->
+<section id="team" class="alt-bg">
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center; max-width:560px; margin:0 auto 0;">
+      <p class="section-eyebrow">🧑‍🎨 The Crew</p>
+      <h2 class="section-heading display">Meet Our <em style="color:var(--accent)">Team</em></h2>
+      <p class="section-subheading" style="margin:0 auto;">Creative professionals united by a love of animation and storytelling.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal">
+        <div class="team-avatar">👨‍💼</div>
+        <div class="team-name">Rajkumar Kamila</div>
+        <div class="team-role">Founder & Director</div>
+        <div class="team-bio">Visionary behind 2Dio Animation. Directs all episodes and manages the Horror Homies channel.</div>
+      </div>
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-avatar">✍️</div>
+        <div class="team-name">Akash Thakur</div>
+        <div class="team-role">Head Writer</div>
+        <div class="team-bio">Crafts chilling scripts that hook the audience. Expert in supernatural and folk horror narratives.</div>
+      </div>
+      <div class="team-card reveal reveal-delay-2">
+        <div class="team-avatar">🎨</div>
+        <div class="team-name">Arjun Verma</div>
+        <div class="team-role">Lead Animator</div>
+        <div class="team-bio">Brings characters to life with fluid 2D animation and atmospheric visual design.</div>
+      </div>
+      <div class="team-card reveal reveal-delay-3">
+        <div class="team-avatar">🎙️</div>
+        <div class="team-name">Sana Khan</div>
+        <div class="team-role">Voice Artist</div>
+        <div class="team-bio">Master of expressive Hindi voice performances that bring deep emotion to every character.</div>
+      </div>
+      <div class="team-card reveal">
+        <div class="team-avatar">🔊</div>
+        <div class="team-name">Dev Patel</div>
+        <div class="team-role">Sound Designer</div>
+        <div class="team-bio">Creates haunting soundscapes and eerie scores that complete the horror experience.</div>
+      </div>
+      <div class="team-card reveal reveal-delay-1">
+        <div class="team-avatar">📱</div>
+        <div class="team-name">Nisha Gupta</div>
+        <div class="team-role">Social & Marketing</div>
+        <div class="team-bio">Grows our community and keeps Horror Homies fans engaged across all platforms.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ======= PROCESS ======= -->
+<section id="process">
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center; max-width:580px; margin:0 auto 0;">
+      <p class="section-eyebrow">⚙️ How It Works</p>
+      <h2 class="section-heading display">Our Creative <em style="color:var(--accent)">Process</em></h2>
+      <p class="section-subheading" style="margin:0 auto;">From idea to fully animated episode — our proven 6-step pipeline.</p>
+    </div>
+    <div class="process-grid">
+      <div class="process-card reveal" data-num="01">
+        <div class="process-icon">💡</div>
+        <div class="process-title">Concept & Idea</div>
+        <div class="process-desc">Writers develop original horror concepts inspired by Indian folklore and supernatural legends.</div>
+      </div>
+      <div class="process-card reveal reveal-delay-1" data-num="02">
+        <div class="process-icon">📝</div>
+        <div class="process-title">Script Writing</div>
+        <div class="process-desc">Full Hindi script with dialogue, narration, and visual directions optimized for animation.</div>
+      </div>
+      <div class="process-card reveal reveal-delay-2" data-num="03">
+        <div class="process-icon">🖼️</div>
+        <div class="process-title">Storyboard</div>
+        <div class="process-desc">Panel-by-panel sketches planning every scene, camera angle, and key moment.</div>
+      </div>
+      <div class="process-card reveal reveal-delay-3" data-num="04">
+        <div class="process-icon">🎨</div>
+        <div class="process-title">Animation</div>
+        <div class="process-desc">Fluid 2D animation with dark atmospherics, color grading, and visual effects.</div>
+      </div>
+      <div class="process-card reveal" data-num="05">
+        <div class="process-icon">🎙️</div>
+        <div class="process-title">Voice & Sound</div>
+        <div class="process-desc">Professional voice recording and horror soundscape layered into the final animation.</div>
+      </div>
+      <div class="process-card reveal reveal-delay-1" data-num="06">
+        <div class="process-icon">🚀</div>
+        <div class="process-title">Publish</div>
+        <div class="process-desc">Final QC, thumbnail creation, and publish to YouTube with full SEO optimization.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ======= TESTIMONIALS ======= -->
+<section class="alt-bg">
+  <div class="section-wrap">
+    <div class="reveal" style="text-align:center; max-width:560px; margin:0 auto 0;">
+      <p class="section-eyebrow">⭐ Client Reviews</p>
+      <h2 class="section-heading display">What Clients <em style="color:var(--accent)">Say</em></h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Very responsive and professional. Will definitely work with him again. The animation quality is exceptional!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RK</div>
+          <div><div class="author-name">Rajkumar Kamila</div><div class="author-tag">Verified Client</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Very good job! Quick response time, understood revisions very nicely. Great creative talent and execution."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">TP</div>
+          <div><div class="author-name">Tanu Pathy</div><div class="author-tag">Verified Client</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Very professional work. After the first video I requested 10+ revisions and he did everything perfectly. Highly satisfied!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">VM</div>
+          <div><div class="author-name">Vivek Mehta</div><div class="author-tag">Verified Client</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Brilliant artist and storyteller with a fabulous sense of humor. Our videos became absolute favorites. Thank you so much!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AG</div>
+          <div><div class="author-name">Akash Gupta</div><div class="author-tag">Repeat Client</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="stars">★★★★★</div>
+        <p class="testimonial-text">"Really makes you feel like your project matters. Focuses on what you want to accomplish. Tremendous value."</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">SP</div>
+          <div><div class="author-name">Supriya</div><div class="author-tag">Verified Client</div></div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="stars">★★★★★★</div>
+        <p class="testimonial-text">"I would give 6 stars if possible. Very professional, I will continue working with them on more videos for sure!"</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">AJ</div>
+          <div><div class="author-name">Ajay Gupta</div><div class="author-tag">Repeat Client</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider-line"></div>
+
+<!-- ======= CONTACT ======= -->
+<section id="contact">
+  <div class="section-wrap">
+    <div class="contact-grid">
+      <div class="reveal">
+        <p class="section-eyebrow">📬 Get In Touch</p>
+        <h2 class="section-heading display">Contact <em style="color:var(--accent)">Us</em></h2>
+        <p class="section-subheading" style="margin-bottom:2rem;">
+          Story ideas, collaborations, brand sponsorships, animation projects — we're always open to a conversation!
+        </p>
+        <div class="contact-items">
+          <div class="contact-row">
+            <div class="contact-row-icon">📺</div>
+            <div>
+              <div class="contact-row-label">YouTube</div>
+              <div class="contact-row-val"><a href="https://www.youtube.com/@horrorhomies2609" target="_blank">@horrorhomies2609</a></div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-row-icon">📧</div>
+            <div>
+              <div class="contact-row-label">Email</div>
+              <div class="contact-row-val"><a href="mailto:akashthakur6671@gmail.com">akashthakur6671@gmail.com</a></div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-row-icon">📞</div>
+            <div>
+              <div class="contact-row-label">Phone</div>
+              <div class="contact-row-val"><a href="tel:+918447412225">+91 84474 12225</a> &nbsp;/&nbsp; <a href="tel:+919667657653">+91 96676 57653</a></div>
+            </div>
+          </div>
+          <div class="contact-row">
+            <div class="contact-row-icon">📍</div>
+            <div>
+              <div class="contact-row-label">Location</div>
+              <div class="contact-row-val">India 🇮🇳</div>
+            </div>
+          </div>
+        </div>
+        <div class="social-row">
+          <a href="https://www.youtube.com/@horrorhomies2609" target="_blank" class="social-btn yt">▶ YouTube</a>
+          <a href="https://www.instagram.com/horrorhomies2609/" target="_blank" class="social-btn">📷 Instagram</a>
+          <a href="https://www.facebook.com/people/Horror-Homies/100089004931507/" target="_blank" class="social-btn">📘 Facebook</a>
+          <a href="https://wa.me/+918447412224" target="_blank" class="social-btn">💬 WhatsApp</a>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="form-card">
+          <p class="form-title">Send Us a Message</p>
+          <div id="contactFormWrap">
+            <div class="form-row-2">
+              <div class="form-group">
+                <label class="form-label">Your Name *</label>
+                <input type="text" id="fname" class="form-input" placeholder="Rahul Sharma">
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email *</label>
+                <input type="email" id="femail" class="form-input" placeholder="you@email.com">
+              </div>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Phone</label>
+              <input type="tel" id="fphone" class="form-input" placeholder="+91 XXXXX XXXXX">
+            </div>
+            <div class="form-group">
+              <label class="form-label">I'm Interested In</label>
+              <select id="ftype" class="form-select">
+                <option value="">Choose a topic...</option>
+                <option>Story Submission / Idea</option>
+                <option>Brand Collaboration / Sponsorship</option>
+                <option>Animation Project (B2B)</option>
+                <option>Voice Acting Application</option>
+                <option>Fan Message</option>
+                <option>General Inquiry</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Message *</label>
+              <textarea id="fmessage" class="form-textarea" placeholder="Tell us about your idea, project, or anything else..."></textarea>
+            </div>
+            <button class="form-submit" onclick="handleSubmit()">Send Message →</button>
+          </div>
+          <div class="form-success" id="formSuccess">
+            ✅ Message received! We'll get back to you within 2–3 business days.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= FOOTER ======= -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-logo">2<span class="red">D</span>IO Animation</div>
+      <p class="footer-desc">Animated horror stories and 2D animation from India. Home of the Horror Homies YouTube channel — bringing dark tales to life.</p>
+      <div class="footer-social">
+        <a href="https://www.youtube.com/@horrorhomies2609" target="_blank" title="YouTube">▶</a>
+        <a href="https://www.instagram.com/horrorhomies2609/" target="_blank" title="Instagram">📷</a>
+        <a href="https://www.facebook.com/people/Horror-Homies/100089004931507/" target="_blank" title="Facebook">📘</a>
+        <a href="https://wa.me/+918447412224" target="_blank" title="WhatsApp">💬</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Pages</h4>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#videos">Videos</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#team">Team</a></li>
+        <li><a href="#process">Process</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#types">Horror Stories</a></li>
+        <li><a href="#types">2D Animation</a></li>
+        <li><a href="#types">Explainer Videos</a></li>
+        <li><a href="#types">Kids Rhymes</a></li>
+        <li><a href="#types">Educational</a></li>
+        <li><a href="#contact">Hire Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <ul>
+        <li><a href="mailto:akashthakur6671@gmail.com">Email Us</a></li>
+        <li><a href="tel:+918447412225">+91 84474 12225</a></li>
+        <li><a href="tel:+919667657653">+91 96676 57653</a></li>
+        <li><a href="https://wa.me/+918447412224" target="_blank">WhatsApp</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom" style="max-width:none; padding:1.5rem 5%;">
+    <span>© 2025 <a href="#home">2Dio Animation</a>. All rights reserved.</span>
+    <span>Made with ❤️ by 2Dio Animation Team, India</span>
+  </div>
+</footer>
+
+<!-- SCROLL TOP -->
+<button id="scrollTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/+918447412224" target="_blank" class="wa-float" title="Chat on WhatsApp">💬</a>
+
+<script>
+// ======= THEME TOGGLE =======
+function toggleTheme(){
+  const html = document.documentElement;
+  html.setAttribute('data-theme', html.getAttribute('data-theme')==='dark' ? 'light' : 'dark');
+  localStorage.setItem('theme', html.getAttribute('data-theme'));
+}
+// Restore saved theme
+(function(){
+  const saved = localStorage.getItem('theme') || 'light';
+  document.documentElement.setAttribute('data-theme', saved);
+})();
+
+// ======= MOBILE NAV =======
+function toggleMobileNav(){ document.getElementById('mobileNav').classList.toggle('open'); }
+function closeMobileNav(){ document.getElementById('mobileNav').classList.remove('open'); }
+
+// ======= SCROLL TOP =======
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTop').classList.toggle('show', window.scrollY > 500);
+});
+
+// ======= SCROLL REVEAL =======
+const revealObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold:0.08 });
+document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+// ======= YOUTUBE VIDEOS via RSS =======
+const CHANNEL_ID = 'UCC9TWrD2caWM1Xf1SptHlmw';
+async function loadYTVideos(){
+  try {
+    const rssUrl = encodeURIComponent(`https://www.youtube.com/feeds/videos.xml?channel_id=${CHANNEL_ID}`);
+    const api = `https://api.rss2json.com/v1/api.json?rss_url=${rssUrl}&count=6`;
+    const res = await fetch(api);
+    const data = await res.json();
+    if(data.status !== 'ok' || !data.items?.length) throw new Error('empty');
+
+    document.getElementById('skeleton-grid').style.display = 'none';
+    const grid = document.getElementById('real-grid');
+    grid.style.display = 'grid';
+
+    data.items.forEach(v => {
+      const vid = (v.link.split('v=')[1]||'').split('&')[0];
+      const thumb = `https://img.youtube.com/vi/${vid}/hqdefault.jpg`;
+      const date = new Date(v.pubDate).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'});
+      const card = document.createElement('a');
+      card.className = 'video-card reveal';
+      card.href = v.link; card.target = '_blank'; card.rel = 'noopener';
+      card.innerHTML = `
+        <div class="video-thumb">
+          <img src="${thumb}" alt="${v.title}" loading="lazy">
+          <div class="video-overlay"><div class="play-circle">▶</div></div>
+        </div>
+        <div class="video-info">
+          <div class="video-title">${v.title}</div>
+          <div class="video-meta"><span>📅 ${date}</span></div>
+        </div>`;
+      grid.appendChild(card);
+      revealObs.observe(card);
+    });
+  } catch(err) {
+    document.getElementById('skeleton-grid').style.display = 'none';
+    document.getElementById('yt-error').style.display = 'block';
+  }
+}
+loadYTVideos();
+
+// ======= FORM =======
+function handleSubmit(){
+  const n = document.getElementById('fname').value.trim();
+  const e = document.getElementById('femail').value.trim();
+  const m = document.getElementById('fmessage').value.trim();
+  if(!n || !e || !m){ alert('Please fill in Name, Email, and Message.'); return; }
+  const btn = document.querySelector('.form-submit');
+  btn.disabled = true; btn.textContent = '⏳ Sending...';
+  setTimeout(() => {
+    document.getElementById('contactFormWrap').style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }, 1400);
+}
+</script>
+</body>
+</html>
